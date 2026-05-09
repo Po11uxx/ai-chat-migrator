@@ -1,3 +1,5 @@
+[English](./README_EN.md) | **中文**
+
 # AI Chat Migrator
 
 一个 Chrome 浏览器扩展，用于抓取 AI 对话历史、生成压缩摘要，并一键复制为可迁移的上下文 Prompt。当你在一个 AI 平台达到使用限额时，可以无缝迁移到另一个平台继续对话。
