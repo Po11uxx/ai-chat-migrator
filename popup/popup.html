@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Chat Migrator</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <!-- 顶部标题 -->
+    <header class="header">
+      <h1 class="title">AI Chat Migrator</h1>
+      <div id="platformInfo" class="platform-info">
+        <span id="platformIcon" class="platform-icon"></span>
+        <span id="platformName" class="platform-name">检测中...</span>
+      </div>
+    </header>
+
+    <!-- 不支持提示 -->
+    <div id="unsupported" class="unsupported" style="display: none;">
+      <span class="warning-icon">&#9888;&#65039;</span>
+      <p>当前页面不支持，请在 AI 对话页面使用</p>
+    </div>
+
+    <!-- 主操作区 -->
+    <div id="mainArea" class="main-area">
+      <!-- 抓取按钮 -->
+      <button id="captureBtn" class="btn btn-primary">
+        <span class="btn-icon">&#128248;</span> 抓取当前对话
+      </button>
+
+      <!-- 加载状态 -->
+      <div id="loading" class="loading" style="display: none;">
+        <div class="spinner"></div>
+        <span>正在抓取对话内容...</span>
+      </div>
+
+      <!-- 抓取结果统计 -->
+      <div id="statsArea" class="stats-area" style="display: none;">
+        <div class="stats-grid">
+          <div class="stat-item">
+            <span class="stat-label">对话轮数</span>
+            <span id="statRounds" class="stat-value">-</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">原始 Tokens</span>
+            <span id="statOriginal" class="stat-value">-</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">压缩后 Tokens</span>
+            <span id="statCompressed" class="stat-value">-</span>
+          </div>
+        </div>
+        <div id="compressionRate" class="compression-rate"></div>
+      </div>
+
+      <!-- 目标平台选择 -->
+      <div id="targetArea" class="target-area" style="display: none;">
+        <label class="select-label" for="targetPlatform">目标平台：</label>
+        <select id="targetPlatform" class="select">
+          <option value="通用">通用</option>
+          <option value="ChatGPT">ChatGPT</option>
+          <option value="Claude">Claude</option>
+          <option value="Gemini">Gemini</option>
+          <option value="DeepSeek">DeepSeek</option>
+          <option value="Kimi">Kimi</option>
+          <option value="豆包">豆包</option>
+        </select>
+      </div>
+
+      <!-- 复制按钮 -->
+      <button id="copyBtn" class="btn btn-success" style="display: none;" disabled>
+        <span class="btn-icon">&#128203;</span> 复制迁移 Prompt
+      </button>
+
+      <!-- 复制成功提示 -->
+      <div id="copySuccess" class="copy-success" style="display: none;">
+        &#10004;&#65039; 已复制！去目标平台粘贴即可
+      </div>
+
+      <!-- 错误提示 -->
+      <div id="errorMsg" class="error-msg" style="display: none;"></div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

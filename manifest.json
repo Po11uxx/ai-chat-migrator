@@ -1,0 +1,48 @@
+{
+  "manifest_version": 3,
+  "name": "AI Chat Migrator",
+  "version": "1.0.0",
+  "description": "抓取 AI 对话历史，生成迁移摘要，一键复制到其他平台继续对话",
+  "permissions": ["activeTab", "scripting", "clipboardWrite"],
+  "host_permissions": [
+    "https://claude.ai/*",
+    "https://chatgpt.com/*",
+    "https://gemini.google.com/*",
+    "https://chat.deepseek.com/*",
+    "https://kimi.moonshot.cn/*",
+    "https://kimi.com/*",
+    "https://www.kimi.com/*",
+    "https://www.doubao.com/*"
+  ],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "AI Chat Migrator"
+  },
+  "background": {
+    "service_worker": "background/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://claude.ai/*",
+        "https://chatgpt.com/*",
+        "https://gemini.google.com/*",
+        "https://chat.deepseek.com/*",
+        "https://kimi.moonshot.cn/*",
+        "https://kimi.com/*",
+        "https://www.kimi.com/*",
+        "https://www.doubao.com/*"
+      ],
+      "js": [
+        "content/parsers/claude.js",
+        "content/parsers/chatgpt.js",
+        "content/parsers/gemini.js",
+        "content/parsers/deepseek.js",
+        "content/parsers/kimi.js",
+        "content/parsers/doubao.js",
+        "content/content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
