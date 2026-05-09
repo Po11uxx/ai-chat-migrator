@@ -8,78 +8,103 @@
 </head>
 <body>
   <div class="container">
-    <!-- 顶部标题 -->
+    <!-- Header -->
     <header class="header">
       <h1 class="title">AI Chat Migrator</h1>
       <div id="platformInfo" class="platform-info">
-        <span id="platformIcon" class="platform-icon"></span>
-        <span id="platformName" class="platform-name">检测中...</span>
+        <span id="platformDot" class="platform-dot"></span>
+        <span id="platformName" class="platform-name">Detecting...</span>
       </div>
     </header>
 
-    <!-- 不支持提示 -->
+    <!-- Unsupported -->
     <div id="unsupported" class="unsupported" style="display: none;">
-      <span class="warning-icon">&#9888;&#65039;</span>
-      <p>当前页面不支持，请在 AI 对话页面使用</p>
+      <div class="unsupported-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="8" x2="12" y2="12"/>
+          <line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+      </div>
+      <p class="text-zh">当前页面不支持，请在 AI 对话页面使用</p>
+      <p class="text-en">Unsupported page. Please open an AI chat page.</p>
     </div>
 
-    <!-- 主操作区 -->
+    <!-- Main -->
     <div id="mainArea" class="main-area">
-      <!-- 抓取按钮 -->
+      <!-- Capture button -->
       <button id="captureBtn" class="btn btn-primary">
-        <span class="btn-icon">&#128248;</span> 抓取当前对话
+        <span class="btn-zh">抓取当前对话</span>
+        <span class="btn-en">Capture Conversation</span>
       </button>
 
-      <!-- 加载状态 -->
+      <!-- Loading -->
       <div id="loading" class="loading" style="display: none;">
         <div class="spinner"></div>
-        <span>正在抓取对话内容...</span>
+        <div class="loading-text">
+          <span class="text-zh">正在抓取...</span>
+          <span class="text-en"> Capturing</span>
+        </div>
       </div>
 
-      <!-- 抓取结果统计 -->
+      <!-- Stats -->
       <div id="statsArea" class="stats-area" style="display: none;">
         <div class="stats-grid">
           <div class="stat-item">
-            <span class="stat-label">对话轮数</span>
+            <span class="stat-label">
+              <span class="text-zh">对话轮数</span>
+              <span class="text-en">Rounds</span>
+            </span>
             <span id="statRounds" class="stat-value">-</span>
           </div>
           <div class="stat-item">
-            <span class="stat-label">原始 Tokens</span>
+            <span class="stat-label">
+              <span class="text-zh">原始</span>
+              <span class="text-en">Original</span>
+            </span>
             <span id="statOriginal" class="stat-value">-</span>
           </div>
           <div class="stat-item">
-            <span class="stat-label">压缩后 Tokens</span>
+            <span class="stat-label">
+              <span class="text-zh">压缩后</span>
+              <span class="text-en">Compressed</span>
+            </span>
             <span id="statCompressed" class="stat-value">-</span>
           </div>
         </div>
         <div id="compressionRate" class="compression-rate"></div>
       </div>
 
-      <!-- 目标平台选择 -->
+      <!-- Target platform -->
       <div id="targetArea" class="target-area" style="display: none;">
-        <label class="select-label" for="targetPlatform">目标平台：</label>
+        <label class="select-label" for="targetPlatform">
+          <span class="text-zh">目标平台</span>
+          <span class="text-en">Target</span>
+        </label>
         <select id="targetPlatform" class="select">
-          <option value="通用">通用</option>
+          <option value="通用">General</option>
           <option value="ChatGPT">ChatGPT</option>
           <option value="Claude">Claude</option>
           <option value="Gemini">Gemini</option>
           <option value="DeepSeek">DeepSeek</option>
           <option value="Kimi">Kimi</option>
-          <option value="豆包">豆包</option>
+          <option value="豆包">Doubao</option>
         </select>
       </div>
 
-      <!-- 复制按钮 -->
-      <button id="copyBtn" class="btn btn-success" style="display: none;" disabled>
-        <span class="btn-icon">&#128203;</span> 复制迁移 Prompt
+      <!-- Copy button -->
+      <button id="copyBtn" class="btn btn-secondary" style="display: none;" disabled>
+        <span class="btn-zh">复制迁移 Prompt</span>
+        <span class="btn-en">Copy Migration Prompt</span>
       </button>
 
-      <!-- 复制成功提示 -->
+      <!-- Success -->
       <div id="copySuccess" class="copy-success" style="display: none;">
-        &#10004;&#65039; 已复制！去目标平台粘贴即可
+        <span class="text-zh">已复制，去目标平台粘贴即可</span><br>
+        <span class="text-en">Copied! Paste it into the target platform.</span>
       </div>
 
-      <!-- 错误提示 -->
+      <!-- Error -->
       <div id="errorMsg" class="error-msg" style="display: none;"></div>
     </div>
   </div>
