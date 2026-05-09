@@ -10,12 +10,53 @@
   <div class="container">
     <!-- Header -->
     <header class="header">
-      <h1 class="title">AI Chat Migrator</h1>
+      <div class="header-top">
+        <h1 class="title">AI Chat Migrator</h1>
+        <button id="settingsToggle" class="icon-btn" title="Settings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
+          </svg>
+        </button>
+      </div>
       <div id="platformInfo" class="platform-info">
         <span id="platformDot" class="platform-dot"></span>
         <span id="platformName" class="platform-name">Detecting...</span>
       </div>
     </header>
+
+    <!-- Settings Panel -->
+    <div id="settingsPanel" class="settings-panel" style="display: none;">
+      <div class="settings-title">
+        <span class="text-zh">Gemini API 设置</span>
+        <span class="text-en">Gemini API Settings</span>
+      </div>
+      <div class="api-key-row">
+        <input id="apiKeyInput" type="password" class="input" placeholder="Paste your Gemini API Key" autocomplete="off" spellcheck="false">
+        <button id="apiKeyToggleVis" class="icon-btn icon-btn-sm" title="Show/Hide">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+        </button>
+      </div>
+      <div class="settings-hint">
+        <span class="text-zh">免费获取：</span>
+        <span class="text-en">Get free key at </span>
+        <a href="#" id="aiStudioLink" class="link">aistudio.google.com</a>
+      </div>
+      <div class="settings-row">
+        <label class="toggle-label">
+          <span class="text-zh">AI 智能摘要</span>
+          <span class="text-en">AI Summary</span>
+        </label>
+        <label class="toggle">
+          <input id="aiSummaryToggle" type="checkbox">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      <div id="apiStatus" class="api-status" style="display: none;"></div>
+    </div>
 
     <!-- Unsupported -->
     <div id="unsupported" class="unsupported" style="display: none;">
@@ -42,8 +83,8 @@
       <div id="loading" class="loading" style="display: none;">
         <div class="spinner"></div>
         <div class="loading-text">
-          <span class="text-zh">正在抓取...</span>
-          <span class="text-en"> Capturing</span>
+          <span id="loadingZh" class="text-zh">正在抓取...</span>
+          <span id="loadingEn" class="text-en">Capturing</span>
         </div>
       </div>
 
@@ -73,6 +114,7 @@
           </div>
         </div>
         <div id="compressionRate" class="compression-rate"></div>
+        <div id="summaryMethod" class="summary-method"></div>
       </div>
 
       <!-- Target platform -->

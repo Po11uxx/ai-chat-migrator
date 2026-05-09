@@ -7,10 +7,10 @@ A Chrome browser extension that captures AI conversation history, generates comp
 ## Features
 
 - **One-Click Capture**: Automatically detects the current AI platform and extracts the full conversation from the page DOM
-- **Smart Compression**: Compresses long AI responses (keeps the first 200 + last 100 characters) while preserving all user messages in full
+- **Smart Compression**: Two modes -- local truncation (no network) or Gemini AI summarization (free API key required)
 - **Migration Prompt Generation**: Produces a structured context prompt ready to paste into the target platform
 - **Token Estimation**: Displays original vs. compressed token counts and compression ratio
-- **Fully Local**: All summarization and compression runs entirely in the browser -- no external API calls, your conversation data never leaves your device
+- **Privacy First**: In local mode, data never leaves your browser; in AI mode, conversations are sent only to Google Gemini API
 
 ## Supported Platforms
 
@@ -129,13 +129,35 @@ ai-chat-migrator/
     └── templateBuilder.js     # Template builder reference implementation
 ```
 
+## AI Summary (Optional)
+
+The extension can use the **Gemini API** to generate high-quality summaries instead of simple local truncation.
+
+### Setup
+
+1. Click the gear icon in the top right of the popup to open Settings
+2. Get a free API key at [aistudio.google.com/apikey](https://aistudio.google.com/apikey)
+3. Paste your key and enable the "AI Summary" toggle
+
+### Model Fallback Strategy
+
+The extension tries models in order, automatically switching on quota errors:
+
+| Priority | Model | Description |
+|----------|-------|-------------|
+| 1 | `gemini-2.5-flash-lite` | Fastest, highest free quota |
+| 2 | `gemini-2.5-flash` | Best price-performance |
+| 3 | `gemini-3.1-flash-lite` | Latest generation lightweight |
+
+If all models fail, it falls back to local compression automatically.
+
 ## Technical Details
 
 - **Manifest V3**: Uses the latest Chrome extension specification
 - **Vanilla JS**: No external frameworks (no React, Vue, or jQuery)
-- **Zero Network Requests**: All processing runs entirely locally
 - **Proactive Injection**: Uses `chrome.scripting.executeScript` to inject content scripts on demand -- no page refresh needed
 - **Multi-Selector Compatibility**: Each platform parser includes multiple DOM selector sets with fallback strategies to handle UI changes
+- **Dual Summary Modes**: Local compression (zero network requests) or Gemini AI smart summary (optional)
 
 ## FAQ
 
@@ -153,7 +175,7 @@ A: Chrome and all Chromium-based browsers (Edge, Arc, Brave, etc.) are supported
 
 **Q: Will my conversation data be uploaded to a server?**
 
-A: No. All data processing happens locally in the browser. The extension makes no network requests -- your conversation data never leaves your device.
+A: In local compression mode, no -- all processing happens in the browser. If you enable AI Summary, conversation content is sent to Google Gemini API for processing.
 
 ## Adding a New Platform
 

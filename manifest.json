@@ -3,7 +3,7 @@
   "name": "AI Chat Migrator",
   "version": "1.0.0",
   "description": "抓取 AI 对话历史，生成迁移摘要，一键复制到其他平台继续对话",
-  "permissions": ["activeTab", "scripting", "clipboardWrite"],
+  "permissions": ["activeTab", "scripting", "clipboardWrite", "storage"],
   "host_permissions": [
     "https://claude.ai/*",
     "https://chatgpt.com/*",
